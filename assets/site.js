@@ -58,7 +58,8 @@ function updateFilterSections(target) {
 function applyFilterRoot(root) {
   const target = document.querySelector(root.dataset.filterTarget);
   if (!target) return;
-  const items = Array.from(target.querySelectorAll(".filter-item"));
+  const itemSelector = root.dataset.filterItems || ".filter-item";
+  const items = Array.from(target.querySelectorAll(itemSelector));
   let count = 0;
   items.forEach((item) => {
     const visible = itemMatches(item, root);
