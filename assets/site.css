@@ -76,6 +76,12 @@ h5 { margin: .8rem 0 .35rem; font-size: .84rem; color: var(--muted); }
   background: #fff;
   font-size: .86rem;
 }
+.section-nav a.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #eff4ff;
+  font-weight: 700;
+}
 main {
   width: min(1500px, 100%);
   margin: 0 auto;
@@ -94,17 +100,20 @@ main {
 }
 .article-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: .75rem;
 }
 .article-list.compact {
-  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 .article-card {
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   background: #fcfdff;
   padding: .85rem;
+}
+.comparison-card {
+  background: #fbfdff;
 }
 .article-meta {
   display: flex;
@@ -153,6 +162,14 @@ summary {
 .detail-panel {
   border-top: 1px solid #d7e4f2;
   padding: .75rem;
+  background: #f7fbff;
+}
+.context-block {
+  margin: .75rem 0;
+  border: 1px solid #d7e4f2;
+  border-radius: 8px;
+  padding: .7rem;
+  background: #f7fbff;
 }
 .article-links {
   display: flex;
@@ -169,7 +186,7 @@ summary {
 }
 .filters {
   display: grid;
-  grid-template-columns: minmax(16rem, 2fr) repeat(3, minmax(10rem, 1fr));
+  grid-template-columns: minmax(16rem, 2fr) repeat(auto-fit, minmax(10rem, 1fr));
   gap: .7rem;
   margin-bottom: .75rem;
 }
@@ -198,7 +215,7 @@ table {
   min-width: 44rem;
   border-collapse: collapse;
   border: 1px solid var(--line);
-  table-layout: fixed;
+  table-layout: auto;
   background: #fff;
   font-size: .86rem;
 }
@@ -223,6 +240,79 @@ tr:last-child td { border-bottom: 0; }
   border-radius: 8px;
   background: #f9fcff;
 }
+.clinical-table {
+  min-width: 0;
+}
+.summary-table-block {
+  margin: .7rem 0 1rem;
+  border: 1px solid #d7e4f2;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+.summary-table-block > summary {
+  padding: .65rem .8rem;
+}
+.summary-table-block .table-wrap {
+  padding: 0 .75rem .75rem;
+}
+.topic-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .75rem;
+}
+.topic-card {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fcfdff;
+  padding: .85rem;
+}
+.topic-card h3 {
+  margin: .45rem 0 .55rem;
+  font-size: 1rem;
+}
+.trend-card p {
+  margin: .45rem 0;
+}
+.mini-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .5rem;
+  margin: .6rem 0 0;
+}
+.mini-metrics div {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: .5rem;
+  background: #fff;
+}
+.mini-metrics dt {
+  color: var(--muted);
+  font-size: .75rem;
+}
+.mini-metrics dd {
+  margin: .15rem 0 0;
+  font-weight: 700;
+}
+.related-list {
+  padding: .7rem;
+  border-top: 1px solid #d7e4f2;
+}
+.related-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: .7rem;
+  margin-bottom: .6rem;
+  background: #fff;
+}
+.related-item:last-child {
+  margin-bottom: 0;
+}
+.related-item h4 {
+  margin: .4rem 0 .3rem;
+}
+.filter-section.hidden {
+  display: none;
+}
 .hidden { display: none; }
 footer {
   padding: 1rem clamp(1rem, 4vw, 3rem) 2rem;
@@ -233,5 +323,7 @@ footer {
   .site-header { grid-template-columns: 1fr; }
   .filters { grid-template-columns: 1fr; }
   .article-list, .article-list.compact { grid-template-columns: 1fr; }
+  .mini-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   table { min-width: 36rem; }
+  .clinical-table { min-width: 34rem; }
 }
