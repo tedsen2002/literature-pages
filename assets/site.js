@@ -1,7 +1,37 @@
 
+const queryParams = new URLSearchParams(window.location.search);
+
 function controlValue(root, selector) {
   const control = root.querySelector(selector);
   return control ? control.value : "";
+}
+
+function queryValue(...keys) {
+  for (const key of keys) {
+    const value = queryParams.get(key);
+    if (value) return value;
+  }
+  return "";
+}
+
+function setControlValue(root, selector, value) {
+  if (!value) return;
+  const control = root.querySelector(selector);
+  if (!control) return;
+  if (control.tagName === "SELECT") {
+    const option = Array.from(control.options).find((item) => item.value === value);
+    if (option) control.value = value;
+    return;
+  }
+  control.value = value;
+}
+
+function applyInitialQueryParams(root) {
+  setControlValue(root, ".filter-search", queryValue("q", "search"));
+  setControlValue(root, ".filter-cancer", queryValue("cancer", "topic_cancer"));
+  setControlValue(root, ".filter-theme", queryValue("theme", "topic_theme"));
+  setControlValue(root, ".filter-priority", queryValue("priority"));
+  setControlValue(root, ".filter-study", queryValue("study"));
 }
 
 function itemMatches(item, root) {
@@ -43,6 +73,7 @@ function applyFilterRoot(root) {
 }
 
 document.querySelectorAll(".filter-panel").forEach((root) => {
+  applyInitialQueryParams(root);
   root.querySelectorAll("input, select").forEach((control) => {
     control.addEventListener("input", () => applyFilterRoot(root));
   });
