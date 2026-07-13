@@ -6,6 +6,11 @@ function controlValue(root, selector) {
   return control ? control.value : "";
 }
 
+function controlChecked(root, selector) {
+  const control = root.querySelector(selector);
+  return Boolean(control && control.checked);
+}
+
 function queryValue(...keys) {
   for (const key of keys) {
     const value = queryParams.get(key);
@@ -40,11 +45,13 @@ function itemMatches(item, root) {
   const theme = controlValue(root, ".filter-theme");
   const priority = controlValue(root, ".filter-priority");
   const study = controlValue(root, ".filter-study");
+  const manualOnly = controlChecked(root, ".filter-manual");
   if (query && !(item.dataset.search || "").includes(query)) return false;
   if (cancer && item.dataset.cancer !== cancer) return false;
   if (theme && item.dataset.theme !== theme) return false;
   if (priority && item.dataset.priority !== priority) return false;
   if (study && item.dataset.study !== study) return false;
+  if (manualOnly && item.dataset.manual !== "1") return false;
   return true;
 }
 

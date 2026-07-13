@@ -196,6 +196,23 @@ label {
   color: var(--muted);
   font-size: .8rem;
 }
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  white-space: nowrap;
+  min-height: 2.45rem;
+  padding: .45rem .55rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+}
+.filter-checkbox input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--accent);
+}
 input, select {
   width: 100%;
   border: 1px solid var(--line-strong);
