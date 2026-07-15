@@ -288,6 +288,24 @@ th {
   font-weight: 700;
 }
 tr:last-child td { border-bottom: 0; }
+.database-table {
+  min-width: 123rem;
+}
+.database-table th {
+  white-space: nowrap;
+}
+.database-table th:nth-child(1), .database-table td:nth-child(1) { min-width: 9rem; }
+.database-table th:nth-child(2), .database-table td:nth-child(2) { min-width: 5.5rem; white-space: nowrap; }
+.database-table th:nth-child(3), .database-table td:nth-child(3) { min-width: 6.5rem; }
+.database-table th:nth-child(4), .database-table td:nth-child(4) { min-width: 10rem; }
+.database-table th:nth-child(5), .database-table td:nth-child(5) { min-width: 8rem; }
+.database-table th:nth-child(6), .database-table td:nth-child(6) { min-width: 6.5rem; white-space: nowrap; }
+.database-table th:nth-child(7), .database-table td:nth-child(7) { min-width: 4rem; white-space: nowrap; }
+.database-table th:nth-child(8), .database-table td:nth-child(8) { min-width: 22rem; }
+.database-table th:nth-child(9), .database-table td:nth-child(9) { min-width: 6.5rem; white-space: nowrap; }
+.database-table th:nth-child(10), .database-table td:nth-child(10) { min-width: 12rem; }
+.database-table th:nth-child(11), .database-table td:nth-child(11) { min-width: 15rem; }
+.database-table th:nth-child(12), .database-table td:nth-child(12) { min-width: 18rem; }
 .clinical-block {
   margin-top: .8rem;
   padding: .7rem;
