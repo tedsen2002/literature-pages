@@ -174,10 +174,43 @@ details,
   font-size: .75rem;
   overflow-wrap: anywhere;
 }
-.tag-must { border-color: var(--danger); color: var(--danger); background: #fff6f5; }
-.tag-monitor { border-color: #936a00; color: var(--warn); background: #fff9e6; }
+.tag-must { border-color: #344054; color: #1d2939; background: #e9edf2; font-weight: 700; }
+.tag-monitor { border-color: #98a2b3; color: #344054; background: #f8fafc; }
 .tag-manual { border-color: var(--accent); color: var(--accent); background: #eff4ff; }
 .tag-muted { color: var(--muted); }
+.tag-new { border-color: var(--accent); color: #fff; background: var(--accent); font-weight: 700; }
+.tag-series { border-color: #9e77ed; color: #53389e; background: #f9f5ff; }
+.tag-scope { border-style: dashed; color: var(--muted); }
+.article-source {
+  margin-top: .3rem;
+  color: var(--muted);
+  font-size: .78rem;
+}
+.meta-journal {
+  display: inline-block;
+  max-width: 26rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+  font-style: italic;
+}
+.permalink {
+  color: var(--muted);
+  text-decoration: underline dotted;
+}
+.article-summary strong { color: #1d2939; }
+.summary-boundary {
+  border-left: 3px solid #98a2b3;
+  padding-left: .6rem;
+}
+.article-card,
+.topic-card,
+.related-item {
+  scroll-margin-top: 4.5rem;
+}
+.article-card.search-hit { box-shadow: 0 0 0 2px var(--accent); }
+.is-targeted { box-shadow: 0 0 0 3px #fdb022; }
 .article-card h3 {
   margin: .45rem 0 .35rem;
   font-size: .98rem;
@@ -241,7 +274,7 @@ label {
   display: flex;
   align-items: center;
   gap: .45rem;
-  white-space: nowrap;
+  white-space: normal;
   min-height: 2.45rem;
   padding: .45rem .55rem;
   border: 1px solid var(--line-strong);
@@ -263,6 +296,28 @@ input, select {
   color: var(--text);
   font: inherit;
 }
+.filter-toggle { display: none; }
+.filter-note { margin: .2rem 0; }
+.scope-note { margin: .4rem 0 .9rem; }
+.scope-note-body {
+  padding: .1rem .8rem .5rem;
+  font-size: .86rem;
+}
+.latest-additions {
+  margin: .2rem 0 .6rem;
+  padding: .55rem .7rem;
+  border: 1px solid #c7d7fe;
+  border-radius: 8px;
+  background: #eff4ff;
+  font-size: .88rem;
+}
+.topic-hit-note {
+  margin: .4rem 0;
+  color: var(--accent);
+  font-size: .86rem;
+  font-weight: 700;
+}
+.search-origin-block { margin-top: .8rem; }
 .table-wrap {
   width: 100%;
   overflow-x: auto;
@@ -439,14 +494,49 @@ footer {
   .site-header-secondary h1 {
     font-size: 1.8rem;
   }
-  .site-header-secondary .metrics {
+  .site-header-secondary .metrics,
+  .site-header-latest .metrics {
     display: none;
   }
+  .filter-toggle {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: .5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: .45rem .7rem;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+  }
+  .filter-panel:not(.is-open) { display: none; }
+  .meta-journal { max-width: 100%; }
   .filters { grid-template-columns: 1fr; }
   .article-list, .article-list.compact { grid-template-columns: 1fr; }
   .mini-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   table { min-width: 36rem; }
-  .clinical-table { min-width: 34rem; }
+  .clinical-table { min-width: 0; }
+  .clinical-table thead { display: none; }
+  .clinical-table,
+  .clinical-table tbody,
+  .clinical-table tr,
+  .clinical-table td {
+    display: block;
+    width: 100%;
+  }
+  .clinical-table tr {
+    border-bottom: 1px solid var(--line);
+    padding: .3rem 0;
+  }
+  .clinical-table td { border-bottom: 0; }
+  .clinical-table td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--muted);
+    font-size: .76rem;
+    font-weight: 700;
+  }
   .article-info-table,
   .clinical-population-table { min-width: 0; }
 }
