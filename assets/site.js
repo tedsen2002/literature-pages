@@ -1,3 +1,4 @@
+const SEARCH_SYNONYMS = [{"zh": ["肝癌", "肝細胞癌"], "en": ["HCC", "hepatocellular"]}, {"zh": ["胰臟癌", "胰腺癌"], "en": ["pancreatic", "pancreas"]}, {"zh": ["直腸癌"], "en": ["rectal", "rectum"]}, {"zh": ["肺癌"], "en": ["lung cancer", "NSCLC", "SCLC"]}, {"zh": ["前列腺", "攝護腺"], "en": ["prostate"]}, {"zh": ["乳癌"], "en": ["breast cancer"]}, {"zh": ["腦轉移"], "en": ["brain metastases", "brain metastasis", "brain metastatic"]}, {"zh": ["腦瘤", "膠質瘤", "膠質母細胞瘤"], "en": ["glioma", "glioblastoma", "brain tumor", "brain tumour", "ependymoma"]}, {"zh": ["寡轉移"], "en": ["oligometastatic", "oligometastasis", "oligometastases", "oligoprogressive", "oligoprogression"]}, {"zh": ["骨轉移"], "en": ["bone metastases", "bone metastasis", "spine metastases", "spinal metastases"]}, {"zh": ["放射手術"], "en": ["radiosurgery", "SRS"]}, {"zh": ["立體定位"], "en": ["SBRT", "SABR", "stereotactic"]}, {"zh": ["質子"], "en": ["proton"]}, {"zh": ["低分次", "大分割"], "en": ["hypofractionation", "hypofractionated"]}, {"zh": ["超低分次", "超大分割"], "en": ["ultrahypofractionation", "ultra-hypofractionation", "ultrahypofractionated", "ultra-hypofractionated"]}, {"zh": ["全腦"], "en": ["WBRT", "whole brain", "whole-brain"]}, {"zh": ["同步化", "化放療", "化學放射"], "en": ["chemoradiotherapy", "chemoradiation"]}, {"zh": ["全程前導", "全程新輔助"], "en": ["TNT", "total neoadjuvant"]}, {"zh": ["荷爾蒙", "雄性素"], "en": ["ADT", "androgen deprivation"]}, {"zh": ["免疫治療"], "en": ["immunotherapy", "immune checkpoint", "PD-1", "PD-L1"]}, {"zh": ["器官保留", "觀察等待"], "en": ["organ preservation", "watch-and-wait", "watch and wait"]}, {"zh": ["加強照射", "追加劑量"], "en": ["boost"]}, {"zh": ["部分乳房"], "en": ["partial breast", "PBI", "APBI"]}, {"zh": ["近接"], "en": ["brachytherapy"]}, {"zh": ["再照射", "再次放療"], "en": ["re-irradiation", "reirradiation"]}, {"zh": ["生活品質"], "en": ["quality of life", "QoL"]}, {"zh": ["統合分析"], "en": ["meta-analysis", "meta analysis"]}];
 
 const queryParams = new URLSearchParams(window.location.search);
 const FILTER_PARAMS = [
@@ -64,7 +65,27 @@ function escapeRegExp(text) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function searchAlternatives(token) {
+  const hits = SEARCH_SYNONYMS.map((group) => ({
+    group,
+    term: group.zh.find((term) => token.includes(term))
+      || (group.en.some((term) => term.toLowerCase() === token) ? token : ""),
+  })).filter((hit) => hit.term);
+  // 「超低分次」 also contains 「低分次」: keep only the most specific Chinese match.
+  const kept = hits.filter((hit) => !hits.some((other) => other.term.length > hit.term.length && other.term.includes(hit.term)));
+  const alternatives = [token];
+  kept.forEach(({ group }) => [...group.zh, ...group.en].forEach((term) => {
+    const lower = term.toLowerCase();
+    if (!alternatives.includes(lower)) alternatives.push(lower);
+  }));
+  return alternatives;
+}
+
 function tokenMatches(item, token) {
+  return searchAlternatives(token).some((term) => termMatches(item, term));
+}
+
+function termMatches(item, token) {
   const pmids = item.dataset.pmids !== undefined ? item.dataset.pmids : item.dataset.pmid;
   if (/^\d{6,9}$/.test(token) && pmids !== undefined) return pmids.split(" ").includes(token);
   if (/^10\.\d{4,9}\//.test(token) && item.dataset.doi !== undefined) return item.dataset.doi === token;
