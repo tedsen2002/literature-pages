@@ -181,6 +181,7 @@ details,
 .tag-new { border-color: var(--accent); color: #fff; background: var(--accent); font-weight: 700; }
 .tag-series { border-color: #9e77ed; color: #53389e; background: #f9f5ff; }
 .tag-scope { border-style: dashed; color: var(--muted); }
+.tag-auto { border-style: dashed; }
 .article-source {
   margin-top: .3rem;
   color: var(--muted);
@@ -311,6 +312,10 @@ input, select {
   background: #eff4ff;
   font-size: .88rem;
 }
+.latest-additions h3 { margin: 0 0 .25rem; font-size: 1rem; }
+.latest-additions p { margin: 0 0 .3rem; }
+.new-additions { list-style: none; margin: 0; padding: 0; }
+.new-additions li { padding: .3rem 0; border-top: 1px solid #c7d7fe; }
 .topic-hit-note {
   margin: .4rem 0;
   color: var(--accent);
@@ -318,6 +323,38 @@ input, select {
   font-weight: 700;
 }
 .search-origin-block { margin-top: .8rem; }
+.topic-conclusion {
+  margin: .7rem 0;
+  padding: .55rem .8rem .65rem;
+  border: 1px solid #c7d7fe;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: #f8faff;
+}
+.topic-conclusion h4 { margin-top: .2rem; }
+.conclusion-meta {
+  margin-left: .5rem;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 400;
+}
+.topic-conclusion h5 { margin: .6rem 0 .2rem; color: #344054; }
+.topic-conclusion ul { margin: .2rem 0; padding-left: 0; list-style: none; }
+.topic-conclusion details.conclusion-point {
+  margin: .2rem 0;
+  border: 0;
+  background: transparent;
+}
+.conclusion-point > summary {
+  padding: .1rem 0;
+  color: var(--text);
+  font-weight: 400;
+}
+.conclusion-point > p {
+  margin: .25rem 0 .5rem 1.1rem;
+  color: #344154;
+  font-size: .88rem;
+}
 .table-wrap {
   width: 100%;
   overflow-x: auto;
@@ -423,6 +460,7 @@ tr:last-child td { border-bottom: 0; }
   font-weight: 700;
 }
 .topic-comparison-block,
+.trial-index-block,
 .topic-article-block {
   margin-top: .75rem;
 }
